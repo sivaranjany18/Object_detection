@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-import winsound
-
-
 
 # Paths to YOLO model files
 cfg_path = 'yolov3.cfg'  # Ensure this is the path to your .cfg file
@@ -25,10 +22,6 @@ with open(names_path, 'r') as f:
 
 # Initialize video capture for laptop camera
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Use DirectShow backend
-
-# Set camera resolution (width x height)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # Set width
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)  # Set height
 
 # Get screen size
 screen_width = 1900 # Update this based on your screen resolution
@@ -81,11 +74,12 @@ while True:
             x, y, w, h = boxes[i]
             label = str(classes[class_ids[i]])
             confidence = confidences[i]
-            play_sound(label)
+            
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f"{label} {confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
          
-            display_fact(frame, label, x, y)
+          
+            
 
     # Display the frame
     cv2.imshow('Object Detection', frame)
